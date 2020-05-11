@@ -7,6 +7,7 @@ namespace WebformsIntegratedBE_Standalone.ApiControllers
     [RoutePrefix("api/user")]
     public class UserController : ApiController
     {
+        #region Methods
         [HttpGet]
         [Authorize]
         [Route("GenerateToken")]
@@ -17,6 +18,7 @@ namespace WebformsIntegratedBE_Standalone.ApiControllers
 
             var user = new UserInfo { UserName = username, TenantUniqueName = tenantName };
             var token = IzendaBoundary.IzendaTokenAuthorization.GetToken(user);
+
             return token;
         }
 
@@ -26,6 +28,7 @@ namespace WebformsIntegratedBE_Standalone.ApiControllers
         public UserInfo ValidateIzendaAuthToken(string access_token)
         {
             var user = IzendaBoundary.IzendaTokenAuthorization.GetUserInfo(access_token);
+
             return user;
         }
 
@@ -36,8 +39,9 @@ namespace WebformsIntegratedBE_Standalone.ApiControllers
         {
             var userInfo = IzendaBoundary.IzendaTokenAuthorization.DecryptIzendaAuthenticationMessage(message);
             var token = IzendaBoundary.IzendaTokenAuthorization.GetToken(userInfo);
-           
+
             return Ok(new { Token = token });
-        }
+        } 
+        #endregion
     }
 }

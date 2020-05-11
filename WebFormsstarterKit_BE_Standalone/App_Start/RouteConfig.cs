@@ -11,8 +11,6 @@ namespace WebformsIntegratedBE_Standalone
             routes.Ignore("{resource}.axd/{*pathInfo}");
             routes.Ignore("api/{*pathInfo}");
 
-            //routes.MapMvcAttributeRoutes();
-
             routes.MapPageRoute(
                 routeName: "ReportPart",
                 routeUrl: "viewer/reportpart/{id}",
