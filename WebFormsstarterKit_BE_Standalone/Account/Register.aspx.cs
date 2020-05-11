@@ -77,8 +77,8 @@ namespace WebformsIntegratedBE_Standalone.Account
             };
 
             IdentityResult result = await manager.CreateAsync(user, Password.Text);
-            string assignedRole = "Employee";
-            string assignedRoleName = "";
+            var assignedRole = "Employee";
+            var assignedRoleName = "";
 
             if (RoleManager.RoleExists(assignedRole))
             {

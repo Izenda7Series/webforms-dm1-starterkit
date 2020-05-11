@@ -34,7 +34,7 @@ namespace WebformsIntegratedBE_Standalone.Models
                 });
             }
             var role = (await manager.GetRolesAsync(this.Id)).FirstOrDefault();
-            userIdentity.AddClaim(new Claim(ClaimsIdentity.DefaultRoleClaimType, role));
+            userIdentity.AddClaim(new Claim(ClaimsIdentity.DefaultRoleClaimType, role ?? string.Empty));
 
             // Add custom user claims here
             return userIdentity;

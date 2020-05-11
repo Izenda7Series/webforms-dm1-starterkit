@@ -54,7 +54,7 @@ namespace WebformsIntegratedBE_Standalone
         public async Task<ApplicationUser> FindTenantUserAsync(string tenant, string username, string password)
         {
             var context = ApplicationUserDbContext<ApplicationUser>.Create();
-            ApplicationUser user = null; ;
+            ApplicationUser user = null;
 
             user = tenant == null
                 ? await context.Users

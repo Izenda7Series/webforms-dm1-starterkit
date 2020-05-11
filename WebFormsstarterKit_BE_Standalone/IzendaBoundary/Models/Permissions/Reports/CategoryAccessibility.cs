@@ -29,8 +29,6 @@
 // </copyright> 
 // ----------------------------------------------------------------------
 
-//using Mvc5StarterKit.IzendaBoundary.Models.ReportDesigner;
-
 namespace WebformsIntegratedBE_Standalone.IzendaBoundary.Models.Permissions.Reports
 {
     /// <summary>
