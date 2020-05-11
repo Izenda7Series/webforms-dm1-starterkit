@@ -29,8 +29,6 @@
 // </copyright> 
 // ----------------------------------------------------------------------
 
-//using Mvc5StarterKit.IzendaBoundary.Models.DBStructure;
-
 using System.Collections.Generic;
 
 namespace WebformsIntegratedBE_Standalone.IzendaBoundary.Models.Permissions.Scheduling

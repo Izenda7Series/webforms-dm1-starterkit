@@ -29,8 +29,6 @@
 // </copyright> 
 // ----------------------------------------------------------------------
 
-//using Mvc5StarterKit.IzendaBoundary.Models.DBStructure;
-
 namespace WebformsIntegratedBE_Standalone.IzendaBoundary.Models.Permissions.Access
 {
     /// <summary>

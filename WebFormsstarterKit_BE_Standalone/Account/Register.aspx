@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Register" Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="Register.aspx.cs" Inherits="WebformsIntegratedBE_Standalone.Account.Register" %>
+﻿<%@ Page Title="Register" Language="C#" Async="true" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="Register.aspx.cs" Inherits="WebformsIntegratedBE_Standalone.Account.Register" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="LoginContent">
     <h2><%: Title %></h2>
