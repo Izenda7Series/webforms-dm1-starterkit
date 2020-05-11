@@ -16,7 +16,7 @@ namespace WebformsIntegratedBE_Standalone.Report
         #region Methods
         protected void Page_Load(object sender, EventArgs e)
         {
-            ReportId = (Page.RouteData.Values["id"] + string.Empty);
+            ReportId = Page.RouteData.Values["id"] + string.Empty;
             Token = Request.QueryString["token"];
 
             //Logger.DebugFormat("Render report part id={0}, token={1}", ReportId, Token);
