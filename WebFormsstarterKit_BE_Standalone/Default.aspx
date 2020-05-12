@@ -2,12 +2,12 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div class="jumbotron">
+    <div class="jumbotron izenda-header">
         <h1>Izenda WebForms Starterkit</h1>
         <p class="lead">This starter kit will help your development team quickly and easily embed Izenda into your application.</p>
     </div>
 
-    <div>
+    <div class="row izenda-base-color">
         <div class="col-md-4">
             <h2>User Integration</h2>
             <p>Easily integrate your users, roles, and tenants with Izenda. </p>
