@@ -5,19 +5,17 @@ namespace WebformsIntegratedBE_Standalone.Dashboard
 {
     public partial class DashboardViewer : Page
     {
-        //private static readonly log4net.ILog Logger = log4net.LogManager.GetLogger(typeof(DashboardViewer));
+        #region Contants
+        // For demonstration purpose, we can assign id here
+        private static readonly string DEMO_DASHBOARDID = string.Empty; 
+        #endregion
 
         #region Properties
         public string DashboardId { get; set; }
         #endregion
 
         #region Methods
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            // Update this part to make Dashboard viewer functional
-            // DashboardId = (Page.RouteData.Values["id"] + string.Empty);
-            // Logger.DebugFormat("Render Dashboard ID={0}", DashboardId);
-        } 
+        protected void Page_Load(object sender, EventArgs e) => DashboardId = DEMO_DASHBOARDID;
         #endregion
     }
 }

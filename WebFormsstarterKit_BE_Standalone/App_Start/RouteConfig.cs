@@ -20,14 +20,14 @@ namespace WebformsIntegratedBE_Standalone
 
             routes.MapPageRoute(
                 routeName: "ReportViewer",
-                routeUrl: "report/view/{id}",
+                routeUrl: "report/view/",
                 physicalFile: "~/report/ReportViewer.aspx",
                 checkPhysicalUrlAccess: false
             );
 
             routes.MapPageRoute(
                 routeName: "DashboardViewer",
-                routeUrl: "dashboard/edit/{id}",
+                routeUrl: "dashboard/view/",
                 physicalFile: "~/Dashboard/DashboardViewer.aspx",
                 checkPhysicalUrlAccess: false
             );
@@ -37,12 +37,6 @@ namespace WebformsIntegratedBE_Standalone
                 AutoRedirectMode = RedirectMode.Permanent
             };
             routes.EnableFriendlyUrls(settings);
-
-            //routes.MapPageRoute(
-            //    routeName: "Default",
-            //    routeUrl: "{controller}/{action}/{id}",
-            //    defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-            //);
         } 
         #endregion
     }
