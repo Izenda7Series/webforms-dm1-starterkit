@@ -354,8 +354,6 @@
     <Compile Include="Models\Identity\ApplicationUser.cs" />
     <Compile Include="Models\Identity\IdentityModels.cs" />
     <Compile Include="Models\Identity\Tenant.cs" />
-    <Compile Include="Models\ReportItemModel.cs" />
-    <Compile Include="Models\ReportPartsModel.cs" />
     <Compile Include="Models\Identity\UserInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Report\ReportDesigner.aspx.cs">
