@@ -21,21 +21,21 @@
                         <div class="col-md-10">
                             <asp:TextBox runat="server" ID="Tenant" CssClass="form-control" />
                             <%--System admin does not require for this field. Currently set to false. If you want to set this as required, please add a logic to bypass System admin case--%>
-                            <asp:RequiredFieldValidator runat="server" ControlToValidate="Tenant" CssClass="text-danger" ErrorMessage="The tenant field is required." Enabled="false" />
+                            <asp:RequiredFieldValidator runat="server" Display="Dynamic" ControlToValidate="Tenant" CssClass="text-danger" ErrorMessage="The tenant field is required." Enabled="false" />
                         </div>
                     </div>
                     <div class="form-group">
                         <asp:Label runat="server" AssociatedControlID="Email" CssClass="col-md-2 control-label">Email</asp:Label>
                         <div class="col-md-10">
                             <asp:TextBox runat="server" ID="Email" CssClass="form-control" TextMode="Email" />
-                            <asp:RequiredFieldValidator runat="server" ControlToValidate="Email" CssClass="text-danger" ErrorMessage="The email field is required." />
+                            <asp:RequiredFieldValidator runat="server" Display="Dynamic" ControlToValidate="Email" CssClass="text-danger" ErrorMessage="The email field is required." />
                         </div>
                     </div>
                     <div class="form-group">
                         <asp:Label runat="server" AssociatedControlID="Password" CssClass="col-md-2 control-label">Password</asp:Label>
                         <div class="col-md-10">
                             <asp:TextBox runat="server" ID="Password" TextMode="Password" CssClass="form-control" />
-                            <asp:RequiredFieldValidator runat="server" ControlToValidate="Password" CssClass="text-danger" ErrorMessage="The password field is required." />
+                            <asp:RequiredFieldValidator runat="server" Display="Dynamic" ControlToValidate="Password" CssClass="text-danger" ErrorMessage="The password field is required." />
                         </div>
                     </div>
                     <div class="form-group">
