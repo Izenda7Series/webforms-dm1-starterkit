@@ -70,7 +70,6 @@
                         <%-- Reports --%>
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Reports
-                               
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
@@ -88,7 +87,6 @@
                         <%--Dashboards--%>
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Dashboards
-                               
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
@@ -111,6 +109,23 @@
                         <LoggedInTemplate>
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a>Hello, <%: Context.User.Identity.GetUserName()  %> !</a></li>
+
+
+                                <%--Further works: Need to set up a condition for allowed user(s) to manager create user/ tenant
+                                    For now, only for system admin. Please update this condition. Check User Information whether System Admin or not--%>
+                                <% if (Context.User.Identity.GetUserName().Equals("IzendaAdmin@system.com"))
+                                    {
+                                %>
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Create User / Tenant
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a runat="server" href="~/Account/CreateUser">Create User</a></li>
+                                        <li><a runat="server" href="~/Account/CreateTenant">Create Tenant</a></li>
+                                    </ul>
+                                </li>
+                                 <% } %>
                                 <li>
                                     <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
                                 </li>
