@@ -8,6 +8,8 @@ namespace WebformsIntegratedBE_Standalone.IzendaBoundary
     {
         #region Constants
         private const string KEY = "dajo5219W2#ksplm"; //must be at least 16 characters long (128 bits) 
+
+        private readonly static string IzendaAdminUserName = "IzendaAdmin@system.com";
         #endregion
 
         #region Methods
@@ -39,13 +41,7 @@ namespace WebformsIntegratedBE_Standalone.IzendaBoundary
         /// <summary>
         /// Get the token for IzendaAdmin user, to communicate with Izenda to process when user has not been logged in.
         /// </summary>
-        public static string GetIzendaAdminToken()
-        {
-            var userName = ConfigurationManager.AppSettings["IzendaAdminUser"];
-
-            var user = new UserInfo { UserName = userName };
-            return GetToken(user);
-        }
+        public static string GetIzendaAdminToken() => GetToken(new UserInfo { UserName = IzendaAdminUserName });
 
         public static UserInfo DecryptIzendaAuthenticationMessage(string encryptedMessage)
         {
@@ -56,11 +52,6 @@ namespace WebformsIntegratedBE_Standalone.IzendaBoundary
             var rsaParam = ConvertPemToXmlFormat(rsaPrivateKey);
             cipher.ImportParameters(rsaParam);
             //End
-
-            ////Decrypt using RSA private key in XML format
-            //rsaPrivateKey = "<RSAKeyValue><Modulus>zFZQcdI6f2yIg4m8fn+UnlGPa8Klf01ZIIPH1S2YFKmJpPIRGas04b2RGp+HqV5jmB4w7ClroK9kotuWKg1ySqaMOtg+n5cL/lbgx3j3LYFFsX9TZTwi+MBUpO9fBwBWs2Qly/fVziv4FY0p3YXBJOs/vZZNR5lwhw/dysF6LvU=</Modulus><Exponent>AQAB</Exponent><P>9XAmacVdbLsZOJdq11GvXnVpoeWmEI/52oLQ/3wUpBnDekNvspOMtle8G/7dKR3mm+qenkruTFxnDpfVV53G4w==</P><Q>1SFhB7AFT+/ehxDLgwdWEdBFRdkQzEbzNmk1lKgvZf8amipAw4n7DEjSoyqIXqXXr5DdyqSUDARylWnfzADCRw==</Q><DP>Bcsm7Po+sVFdUAuq9vgzpowo+Sxdlih/4luSKWW5awI8rgcnfNSkzq0VgKesesr85ZNNOTlVlLHdsOd+nrnXtw==</DP><DQ>RUqr3C77GykWRP1N3RS2g+Ydj37p+jAbBJaiB+nCNzwALx0Ln0ct6qmGaev7GCJ9BCRqJ2bohxuvESqxywZ4Iw==</DQ><InverseQ>zjfxF1xREc1TNjbFVUX0Bv+MaUZlqEszLH60WChxL7ArVka5DNbPsY889UMvWuM0/zymfIUlJcxHbMU9dmbuOg==</InverseQ><D>CevO8BfS+0jbv/c6DbJIFv/CxOqoemvY/fkoBLO4BJjOtBGEvwhPAv7fQrmoLpMEpuggW/cO4LhjXHzo55XLjLoRjBBbiPbZayaAeptP9oYMyBNwBp9d49taawXm7nxiOC8sszkzJ0gKFeN+plTQruDm+HspaGBmUHdCMlJ9zak=</D></RSAKeyValue>";
-            //cipher.FromXmlString(rsaPrivateKey);
-            ////End Decrypt using RSA private key in XML format
 
             var resultBytes = Convert.FromBase64String(encryptedMessage);
             var decryptedBytes = cipher.Decrypt(resultBytes, false);
