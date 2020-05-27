@@ -7,11 +7,22 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebformsIntegratedBE_Standalone {
-    
-    
-    public partial class SiteMaster {
-        
+namespace WebformsIntegratedBE_Standalone
+{
+
+
+    public partial class SiteMaster
+    {
+
+        /// <summary>
+        /// CreateTenantContent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder CreateTenantContent;
+
         /// <summary>
         /// LoginContent control.
         /// </summary>
@@ -20,7 +31,7 @@ namespace WebformsIntegratedBE_Standalone {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ContentPlaceHolder LoginContent;
-        
+
         /// <summary>
         /// MainContent control.
         /// </summary>

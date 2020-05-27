@@ -38,9 +38,8 @@
                             <asp:RequiredFieldValidator runat="server" Display="Dynamic" ControlToValidate="Password" CssClass="text-danger" ErrorMessage="The password field is required." />
                         </div>
                     </div>
-
-                    <%--You can implement Remember me here--%>
-                    <%-- <div class="form-group">
+                    <%--Uncomment this div if you want to implement remember me--%>
+                    <%--<div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
                             <div class="checkbox">
                                 <asp:CheckBox runat="server" ID="RememberMe" />
@@ -69,3 +68,4 @@
         </div>
     </div>
 </asp:Content>
+

@@ -26,6 +26,7 @@
     </asp:PlaceHolder>
     <form runat="server">
         <asp:ScriptManager runat="server">
+
             <Scripts>
                 <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
                 <asp:ScriptReference Name="MsAjaxBundle" />
@@ -137,6 +138,11 @@
         </div>
 
         <div class="container body-content">
+            <asp:ContentPlaceHolder ID="CreateTenantContent" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+
+        <div class="container body-content">
             <asp:ContentPlaceHolder ID="LoginContent" runat="server">
             </asp:ContentPlaceHolder>
         </div>
@@ -153,7 +159,6 @@
     <script type="text/javascript">
         $(document).ready(function () {
             DoIzendaConfig();
-            $('[data-toggle="tooltip"]').tooltip();
             $('[data-toggle="dropdown"]').dropdown();
             $("#reportPartLoader").hide();
             $("#reportPartLoaderText").hide();
