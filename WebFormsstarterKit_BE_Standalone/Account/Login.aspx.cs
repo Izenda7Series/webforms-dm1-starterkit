@@ -20,7 +20,7 @@ namespace WebformsIntegratedBE_Standalone.Account
             {
                 // Validate the user password
                 var signinManager = Context.GetOwinContext().GetUserManager<ApplicationSignInManager>();
-                var result = await signinManager.PasswordSigninAsync(string.IsNullOrEmpty(Tenant.Text) ? null : Tenant.Text, Email.Text, Password.Text, /*RememberMe.Checked*/ false);
+                var result = await signinManager.PasswordSigninAsync(string.IsNullOrEmpty(Tenant.Text) ? null : Tenant.Text, Email.Text, Password.Text, RememberMe.Checked);
 
                 switch (result)
                 {
@@ -34,7 +34,7 @@ namespace WebformsIntegratedBE_Standalone.Account
                         break;
 
                     case SignInStatus.RequiresVerification:
-                        Response.Redirect($"/Account/TwoFactorAuthenticationSignIn?ReturnUrl={Request.QueryString["ReturnUrl"]}&RememberMe={/*RememberMe.Checked*/ false}", true);
+                        Response.Redirect($"/Account/TwoFactorAuthenticationSignIn?ReturnUrl={Request.QueryString["ReturnUrl"]}&RememberMe={RememberMe.Checked}", true);
                         break;
 
                     default:

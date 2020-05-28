@@ -24,6 +24,23 @@ namespace WebformsIntegratedBE_Standalone.Managers
             }
         }
 
+        public static IEnumerable<string> GetAllTenant()
+        {
+            using (var context = ApplicationUserDbContext<ApplicationUser>.Create())
+            {
+                var tenantList = new List<string>();
+
+                foreach (var tenant in context.Tenants)
+                {
+                    // excludes System tenant
+                    if (!tenant.Name.Equals("System", StringComparison.InvariantCultureIgnoreCase))
+                        tenantList.Add(tenant.Name);
+                }
+
+                return tenantList;
+            }
+        }
+
         public Dictionary<string, int> AllTenants
         {
             get

@@ -126,7 +126,7 @@
                                         <li><a runat="server" href="~/Account/CreateTenant">Create Tenant</a></li>
                                     </ul>
                                 </li>
-                                 <% } %>
+                                <% } %>
                                 <li>
                                     <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
                                 </li>
@@ -138,13 +138,15 @@
         </div>
 
         <div class="container body-content">
-            <asp:ContentPlaceHolder ID="CreateTenantContent" runat="server">
-            </asp:ContentPlaceHolder>
+            <asp:ContentPlaceHolder ID="CreateTenantContent" runat="server"></asp:ContentPlaceHolder>
         </div>
 
         <div class="container body-content">
-            <asp:ContentPlaceHolder ID="LoginContent" runat="server">
-            </asp:ContentPlaceHolder>
+            <asp:ContentPlaceHolder ID="CreateUserContent" runat="server"></asp:ContentPlaceHolder>
+        </div>
+
+        <div class="container body-content">
+            <asp:ContentPlaceHolder ID="LoginContent" runat="server"></asp:ContentPlaceHolder>
         </div>
     </form>
     <div class="izenda-container body-content">
