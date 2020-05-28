@@ -20,7 +20,7 @@ namespace WebformsIntegratedBE_Standalone.Account
         {
             if (!Page.IsPostBack)
             {
-                TenantList.DataSource = IzendaUtilities.GetAllTenant();
+                TenantList.DataSource = IzendaUtilities.GetAllTenants();
                 TenantList.DataBind();
 
                 // back to default status

@@ -18,13 +18,13 @@ namespace WebformsIntegratedBE_Standalone.IzendaBoundary
         {
             using (var context = ApplicationUserDbContext<ApplicationUser>.Create())
             {
-                var tenant = context.Tenants.Where(x => x.Name.Equals((name == null || name == string.Empty ? "System" : name), StringComparison.InvariantCultureIgnoreCase)).SingleOrDefault();
+                var tenant = context.Tenants.Where(x => x.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase)).SingleOrDefault();
 
                 return tenant;
             }
         }
 
-        public static IEnumerable<string> GetAllTenant()
+        public static IEnumerable<string> GetAllTenants()
         {
             using (var context = ApplicationUserDbContext<ApplicationUser>.Create())
             {
@@ -32,9 +32,7 @@ namespace WebformsIntegratedBE_Standalone.IzendaBoundary
 
                 foreach (var tenant in context.Tenants)
                 {
-                    // excludes System tenant
-                    if (!tenant.Name.Equals("System", StringComparison.InvariantCultureIgnoreCase))
-                        tenantList.Add(tenant.Name);
+                    tenantList.Add(tenant.Name);
                 }
 
                 return tenantList;
@@ -47,25 +45,14 @@ namespace WebformsIntegratedBE_Standalone.IzendaBoundary
             {
                 if (_allTenants.Count > 0)
                     return _allTenants;
+
                 using (var context = ApplicationUserDbContext<ApplicationUser>.Create())
                 {
                     _allTenants = context.Tenants.Select(x => x).ToDictionary(i => i.Name, i => i.Id);
                 }
+
                 return _allTenants;
             }
-        }
-
-        public static Dictionary<string, int> NonSystemTenants
-        {
-            get
-            {
-                return AllTenants.Select(t => t).Where(x => !IsSystemTenant(x.Key)).ToDictionary(i => i.Key, i => i.Value);
-            }
-        }
-
-        public static bool IsSystemTenant(string tenantName)
-        {
-            return string.IsNullOrEmpty(tenantName) ? true : tenantName.Equals("System", StringComparison.InvariantCultureIgnoreCase);
         }
 
         public static Tenant GetTenantById(int id)
@@ -95,7 +82,7 @@ namespace WebformsIntegratedBE_Standalone.IzendaBoundary
         /// </summary>
         public static async Task<bool> CreateTenant(string tenantName, string tenantId, string authToken)
         {
-            var existingTenant = await IzendaUtilities.GetIzendaTenantByName(tenantName, authToken);
+            var existingTenant = await GetIzendaTenantByName(tenantName, authToken);
             if (existingTenant != null)
                 return false;
 
@@ -108,9 +95,9 @@ namespace WebformsIntegratedBE_Standalone.IzendaBoundary
             };
 
             // For more information, please refer to https://www.izenda.com/docs/ref/api_tenant.html#post-tenant
-            return await IzendaBoundary.WebAPIService.Instance.PostReturnBooleanAsync("tenant", tenantDetail, authToken);
+            return await WebAPIService.Instance.PostReturnBooleanAsync("tenant", tenantDetail, authToken);
         }
-       
+
         /// <summary>
         /// Create a user
         /// For more information, please refer to https://www.izenda.com/docs/ref/api_user.html#post-user
