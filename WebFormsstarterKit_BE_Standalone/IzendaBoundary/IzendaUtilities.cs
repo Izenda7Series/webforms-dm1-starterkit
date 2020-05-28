@@ -98,6 +98,28 @@ namespace WebformsIntegratedBE_Standalone.IzendaBoundary
             return await WebAPIService.Instance.PostReturnBooleanAsync("tenant", tenantDetail, authToken);
         }
 
+        public static async Task<RoleDetail> CreateRole(string roleName, TenantDetail izendaTenant, string authToken)
+        {
+            var role = await GetIzendaRoleByTenantAndName(izendaTenant != null ? (Guid?)izendaTenant.Id : null, roleName, authToken);
+
+            if (role == null)
+            {
+                role = new RoleDetail
+                {
+                    Active = true,
+                    Deleted = false,
+                    NotAllowSharing = false,
+                    Name = roleName,
+                    TenantId = izendaTenant != null ? (Guid?)izendaTenant.Id : null
+                };
+
+                var response = await WebAPIService.Instance.PostReturnValueAsync<AddRoleResponeMessage, RoleDetail>("role", role, authToken);
+                role = response.Role;
+            }
+
+            return role;
+        }
+
         /// <summary>
         /// Create a user
         /// For more information, please refer to https://www.izenda.com/docs/ref/api_user.html#post-user
@@ -137,31 +159,6 @@ namespace WebformsIntegratedBE_Standalone.IzendaBoundary
                 return tenants.FirstOrDefault(x => x.Name.Equals(tenantName, StringComparison.InvariantCultureIgnoreCase));
 
             return null;
-        }
-
-        /// <summary>
-        /// We are not supporting creating role here. TBD
-        /// </summary>
-        public static async Task<RoleDetail> CreateRole(string roleName, TenantDetail izendaTenant, string authToken)
-        {
-            var role = await GetIzendaRoleByTenantAndName(izendaTenant != null ? (Guid?)izendaTenant.Id : null, roleName, authToken);
-
-            if (role == null)
-            {
-                role = new RoleDetail
-                {
-                    Active = true,
-                    Deleted = false,
-                    NotAllowSharing = false,
-                    Name = roleName,
-                    TenantId = izendaTenant != null ? (Guid?)izendaTenant.Id : null
-                };
-
-                var response = await WebAPIService.Instance.PostReturnValueAsync<AddRoleResponeMessage, RoleDetail>("role", role, authToken);
-                role = response.Role;
-            }
-
-            return role;
         }
 
         private static async Task<RoleDetail> GetIzendaRoleByTenantAndName(Guid? tenantId, string roleName, string authToken)

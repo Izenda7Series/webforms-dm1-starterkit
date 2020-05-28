@@ -75,7 +75,10 @@ namespace WebformsIntegratedBE_Standalone.Account
                         var izendaAdminAuthToken = IzendaTokenAuthorization.GetIzendaAdminToken();
                         appUser.Tenant = IzendaUtilities.GetTenantByName(selectedTenant);
 
-                        var success = await IzendaUtilities.CreateIzendaUser(selectedTenant, UserID.Text, LastName.Text,
+                        var success = await IzendaUtilities.CreateIzendaUser(
+                            selectedTenant, 
+                            UserID.Text, 
+                            LastName.Text,
                             FirstName.Text,
                             isAdmin,
                             assignedRole, izendaAdminAuthToken);

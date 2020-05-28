@@ -1,6 +1,6 @@
-﻿using WebformsIntegratedBE_Standalone.Models;
+﻿using System;
 using System.Configuration;
-using System;
+using WebformsIntegratedBE_Standalone.Models;
 
 namespace WebformsIntegratedBE_Standalone.IzendaBoundary
 {
