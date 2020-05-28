@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Web.UI;
-using WebformsIntegratedBE_Standalone.Managers;
+using WebformsIntegratedBE_Standalone.IzendaBoundary;
 using WebformsIntegratedBE_Standalone.Models;
 
 namespace WebformsIntegratedBE_Standalone.Account
@@ -8,7 +8,7 @@ namespace WebformsIntegratedBE_Standalone.Account
     public partial class CreateTenant : Page
     {
         #region Variables
-        public static bool? createdSuccess = null;
+        public static bool? createdSuccessfully = null;
         public static bool serverError = false;
         #endregion
 
@@ -18,7 +18,7 @@ namespace WebformsIntegratedBE_Standalone.Account
             if (!IsPostBack)
             {
                 // back to default status
-                createdSuccess = null;
+                createdSuccessfully = null;
                 serverError = false;
             }
         }
@@ -27,32 +27,32 @@ namespace WebformsIntegratedBE_Standalone.Account
         {
             if (IsValid)
             {
-                var izendaAdminAuthToken = IzendaBoundary.IzendaTokenAuthorization.GetIzendaAdminToken();
+                var izendaAdminAuthToken = IzendaTokenAuthorization.GetIzendaAdminToken();
 
-                var isTenantExist = TenantManager.GetTenantByName(TenantName.Text);
+                var isTenantExist = IzendaUtilities.GetTenantByName(TenantName.Text);
 
                 if (isTenantExist == null)
                 {
-                    var success = await TenantManager.CreateTenant(TenantName.Text, TenantID.Text, izendaAdminAuthToken);
+                    var success = await IzendaUtilities.CreateTenant(TenantName.Text, TenantID.Text, izendaAdminAuthToken);
 
                     if (success)
                     {
                         var newTenant = new Tenant() { Name = TenantName.Text };
-                        await TenantManager.SaveTenantAsync(newTenant);
+                        await IzendaUtilities.SaveTenantAsync(newTenant);
 
-                        createdSuccess = true;
+                        createdSuccessfully = true;
                     }
                     else // failed at server level
                     {
-                        createdSuccess = null;
+                        createdSuccessfully = null;
                         serverError = true;
                     }
                 }
                 else
-                    createdSuccess = false;
+                    createdSuccessfully = false;
             }
             else
-                createdSuccess = false;
+                createdSuccessfully = false;
         } 
         #endregion
     }

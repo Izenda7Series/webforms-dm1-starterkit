@@ -48,9 +48,6 @@ namespace WebformsIntegratedBE_Standalone
             return user;
         }
 
-        /// <summary>
-        /// Find out user 1. System Admin / 2. Normal user under tenant
-        /// </summary>
         public async Task<ApplicationUser> FindTenantUserAsync(string tenant, string username, string password)
         {
             var context = ApplicationUserDbContext<ApplicationUser>.Create();
@@ -58,7 +55,6 @@ namespace WebformsIntegratedBE_Standalone
 
             user = tenant == null
                 ? await context.Users
-                    .Include(x => x.Tenant)
                     .Where(x => x.UserName.Equals(username, StringComparison.InvariantCultureIgnoreCase))
                     .SingleOrDefaultAsync()
                 : await context.Users
@@ -126,19 +122,20 @@ namespace WebformsIntegratedBE_Standalone
         public ApplicationSignInManager(ApplicationUserManager userManager, IAuthenticationManager authenticationManager) : base(userManager, authenticationManager) 
         { }
 
-        //public SignInStatus CustomSignIn(string tenant, string username, string password, bool remember)
-        //{
-        //    var appUserManager = this.UserManager as ApplicationUserManager;
+        // uncomment this if you want to customize sign in
+        /*public SignInStatus CustomSignIn(string tenant, string username, string password, bool remember)
+        {
+            var appUserManager = this.UserManager as ApplicationUserManager;
 
-        //    var user = appUserManager?.FindTenantUser(tenant, username, password);
-        //    if (user == null)
-        //    {
-        //        return SignInStatus.Failure;
-        //    }
+            var user = appUserManager?.FindTenantUser(tenant, username, password);
+            if (user == null)
+            {
+                return SignInStatus.Failure;
+            }
 
-        //    this.SignIn(user, remember, remember);
-        //    return SignInStatus.Success;
-        //}
+            this.SignIn(user, remember, remember);
+            return SignInStatus.Success;
+        }*/
 
         /// <summary>
         /// Verify login 

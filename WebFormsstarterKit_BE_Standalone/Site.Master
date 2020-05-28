@@ -1,6 +1,5 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="WebformsIntegratedBE_Standalone.SiteMaster" %>
 
-<%@ Import Namespace="WebformsIntegratedBE_Standalone.Managers" %>
 <%@ Import Namespace="Microsoft.AspNet.Identity" %>
 <!DOCTYPE html>
 

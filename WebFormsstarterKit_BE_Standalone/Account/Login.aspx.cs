@@ -10,8 +10,8 @@ namespace WebformsIntegratedBE_Standalone.Account
         #region Methods
         protected void Page_Load(object sender, EventArgs e)
         {
-            //Enable this once you have account confirmation enabled for password reset functionality
-            //ForgotPasswordHyperLink.NavigateUrl = "Forgot";
+            // Enable this once you have account confirmation enabled for password reset functionality
+            // ForgotPasswordHyperLink.NavigateUrl = "Forgot";
         }
 
         protected async void LogIn(object sender, EventArgs e)

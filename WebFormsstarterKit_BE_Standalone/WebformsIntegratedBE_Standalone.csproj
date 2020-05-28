@@ -213,6 +213,9 @@
     <Content Include="Dashboard\DashboardDesigner.aspx" />
     <Content Include="Dashboard\Dashboards.aspx" />
     <Content Include="Dashboard\DashboardViewer.aspx" />
+    <Content Include="DBScript\IzendaWebFormsBEStandalone.sql" />
+    <Content Include="DBScript\retail.sql" />
+    <Content Include="DBScript\WebFormsBEStandalone.sql" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -353,7 +356,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="IzendaBoundary\IzendaTokenAuthorization.cs" />
+    <Compile Include="IzendaBoundary\Models\AddRoleResponeMessage.cs" />
+    <Compile Include="IzendaBoundary\Models\RoleDetail.cs" />
+    <Compile Include="IzendaBoundary\Models\RoleInfo.cs" />
     <Compile Include="IzendaBoundary\Models\TenantDetail.cs" />
+    <Compile Include="IzendaBoundary\Models\UserDetail.cs" />
     <Compile Include="IzendaBoundary\StringCipher.cs" />
     <Compile Include="IzendaBoundary\WebAPIService.cs" />
     <Compile Include="IzendaPage.cs">
@@ -366,7 +373,7 @@
     <Compile Include="IzendaRoot.aspx.designer.cs">
       <DependentUpon>IzendaRoot.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Managers\TenantManager.cs" />
+    <Compile Include="IzendaBoundary\IzendaUtilities.cs" />
     <Compile Include="Models\Helpers\IndentifyHelper.cs" />
     <Compile Include="Models\Identity\ApplicationUser.cs" />
     <Compile Include="Models\Identity\IdentityModels.cs" />

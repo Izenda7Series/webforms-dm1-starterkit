@@ -33,6 +33,7 @@ namespace WebformsIntegratedBE_Standalone.Models
                     new Claim("tenantId",Tenant.Id.ToString()),
                 });
             }
+
             var role = (await manager.GetRolesAsync(this.Id)).FirstOrDefault();
             userIdentity.AddClaim(new Claim(ClaimsIdentity.DefaultRoleClaimType, role ?? string.Empty));
 
