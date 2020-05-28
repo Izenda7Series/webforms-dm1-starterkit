@@ -52,21 +52,21 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <asp:Label runat="server" AssociatedControlID="UserID" CssClass="col-md-2 control-label">Tenant ID</asp:Label>
+                        <asp:Label runat="server" AssociatedControlID="UserID" CssClass="col-md-2 control-label">User ID</asp:Label>
                         <div class="col-md-10">
                             <asp:TextBox runat="server" ID="UserID" CssClass="form-control" TextMode="Email" />
                             <asp:RequiredFieldValidator runat="server" Display="Dynamic" ControlToValidate="UserID" CssClass="text-danger" ErrorMessage="The user ID field is required." />
                         </div>
                     </div>
                     <div class="form-group">
-                        <asp:Label runat="server" AssociatedControlID="FirstName" CssClass="col-md-2 control-label">Tenant Name</asp:Label>
+                        <asp:Label runat="server" AssociatedControlID="FirstName" CssClass="col-md-2 control-label">First Name</asp:Label>
                         <div class="col-md-10">
                             <asp:TextBox runat="server" ID="FirstName" CssClass="form-control" />
                             <asp:RequiredFieldValidator runat="server" Display="Dynamic" ControlToValidate="FirstName" CssClass="text-danger" ErrorMessage="The first name field is required." />
                         </div>
                     </div>
                     <div class="form-group">
-                        <asp:Label runat="server" AssociatedControlID="LastName" CssClass="col-md-2 control-label">Tenant Name</asp:Label>
+                        <asp:Label runat="server" AssociatedControlID="LastName" CssClass="col-md-2 control-label">Last Name</asp:Label>
                         <div class="col-md-10">
                             <asp:TextBox runat="server" ID="LastName" CssClass="form-control" />
                             <asp:RequiredFieldValidator runat="server" Display="Dynamic" ControlToValidate="LastName" CssClass="text-danger" ErrorMessage="The last name field is required." />
