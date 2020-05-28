@@ -1,12 +1,6 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Data.Entity.Infrastructure.Annotations;
-using System.Data.Entity.Validation;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace WebformsIntegratedBE_Standalone.Models
@@ -45,83 +39,33 @@ namespace WebformsIntegratedBE_Standalone.Models
         #endregion
     }
 
-    public class ApplicationUserDbContext<TUser> : IdentityDbContext<TUser> where TUser : ApplicationUser
+    /// <summary>
+    /// Client DB Tenant
+    /// </summary>
+    public class Tenant
+    {
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+    }
+
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         #region Properties
         public virtual IDbSet<Tenant> Tenants { get; set; } 
         #endregion
 
         #region CTOR
-        public ApplicationUserDbContext() : base("DefaultConnection", throwIfV1Schema: false)
+        public ApplicationDbContext() 
+            : base("DefaultConnection", throwIfV1Schema: false)
         { }
         #endregion
 
         #region Methods
-        public static ApplicationUserDbContext<TUser> Create()
+        public static ApplicationDbContext Create()
         {
-            return new ApplicationUserDbContext<TUser>();
+            return new ApplicationDbContext();
         }
-
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-            var user = modelBuilder.Entity<TUser>();
-
-            user.Property(u => u.UserName)
-                .IsRequired()
-                .HasMaxLength(256)
-                .HasColumnAnnotation("Index", new IndexAnnotation(
-                    new IndexAttribute("UserNameIndex") { IsUnique = true, Order = 1 }));
-            user.Property(u => u.Tenant_Id)
-                .IsRequired()
-                .HasColumnAnnotation("Index", new IndexAnnotation(
-                    new IndexAttribute("UserNameIndex") { IsUnique = true, Order = 2 }));
-        }
-
-        protected override DbEntityValidationResult ValidateEntity(DbEntityEntry entityEntry, IDictionary<object, object> items)
-        {
-            if (entityEntry != null && entityEntry.State == EntityState.Added)
-            {
-                var errors = new List<DbValidationError>();
-                var user = entityEntry.Entity as TUser;
-
-                if (user != null)
-                {
-                    if (this.Users.Any(u => string.Equals(u.UserName, user.UserName)
-                      && u.Tenant_Id == user.Tenant_Id))
-                    {
-                        errors.Add(new DbValidationError("User",
-                          string.Format("Username {0} is already taken for tenant {1}",
-                            user.UserName, user.Tenant_Id)));
-                    }
-
-                    if (this.RequireUniqueEmail
-                      && this.Users.Any(u => string.Equals(u.Email, user.Email)
-                      && u.Tenant_Id == user.Tenant_Id))
-                    {
-                        errors.Add(new DbValidationError("User",
-                          string.Format("Email Address {0} is already taken for tenant {1}",
-                            user.UserName, user.Tenant_Id)));
-                    }
-                }
-                else
-                {
-                    var role = entityEntry.Entity as IdentityRole;
-
-                    if (role != null && this.Roles.Any(r => string.Equals(r.Name, role.Name)))
-                    {
-                        errors.Add(new DbValidationError("Role",
-                          string.Format("Role {0} already exists", role.Name)));
-                    }
-                }
-                if (errors.Any())
-                {
-                    return new DbEntityValidationResult(entityEntry, errors);
-                }
-            }
-
-            return new DbEntityValidationResult(entityEntry, new List<DbValidationError>());
-        } 
         #endregion
     }
 }

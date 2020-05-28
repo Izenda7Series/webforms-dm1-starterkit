@@ -16,7 +16,7 @@ namespace WebformsIntegratedBE_Standalone.IzendaBoundary
         #region Methods
         public static Tenant GetTenantByName(string name)
         {
-            using (var context = ApplicationUserDbContext<ApplicationUser>.Create())
+            using (var context = ApplicationDbContext.Create())
             {
                 var tenant = context.Tenants.Where(x => x.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase)).SingleOrDefault();
 
@@ -26,7 +26,7 @@ namespace WebformsIntegratedBE_Standalone.IzendaBoundary
 
         public static IEnumerable<string> GetAllTenants()
         {
-            using (var context = ApplicationUserDbContext<ApplicationUser>.Create())
+            using (var context = ApplicationDbContext.Create())
             {
                 var tenantList = new List<string>();
 
@@ -46,7 +46,7 @@ namespace WebformsIntegratedBE_Standalone.IzendaBoundary
                 if (_allTenants.Count > 0)
                     return _allTenants;
 
-                using (var context = ApplicationUserDbContext<ApplicationUser>.Create())
+                using (var context = ApplicationDbContext.Create())
                 {
                     _allTenants = context.Tenants.Select(x => x).ToDictionary(i => i.Name, i => i.Id);
                 }
@@ -57,7 +57,7 @@ namespace WebformsIntegratedBE_Standalone.IzendaBoundary
 
         public static Tenant GetTenantById(int id)
         {
-            using (var context = ApplicationUserDbContext<ApplicationUser>.Create())
+            using (var context = ApplicationDbContext.Create())
             {
                 var tenant = context.Tenants.Where(x => x.Id == id).SingleOrDefault();
 
@@ -67,7 +67,7 @@ namespace WebformsIntegratedBE_Standalone.IzendaBoundary
 
         public static async Task<Tenant> SaveTenantAsync(Tenant tenant)
         {
-            using (var context = ApplicationUserDbContext<ApplicationUser>.Create())
+            using (var context = ApplicationDbContext.Create())
             {
                 context.Tenants.Add(tenant);
                 await context.SaveChangesAsync();
