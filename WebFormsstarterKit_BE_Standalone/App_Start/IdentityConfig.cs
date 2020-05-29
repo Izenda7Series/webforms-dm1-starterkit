@@ -125,21 +125,6 @@ namespace WebformsIntegratedBE_Standalone
         public ApplicationSignInManager(ApplicationUserManager userManager, IAuthenticationManager authenticationManager) : base(userManager, authenticationManager) 
         { }
 
-        // uncomment this if you want to customize sign in
-        /*public SignInStatus CustomSignIn(string tenant, string username, string password, bool remember)
-        {
-            var appUserManager = this.UserManager as ApplicationUserManager;
-
-            var user = appUserManager?.FindTenantUser(tenant, username, password);
-            if (user == null)
-            {
-                return SignInStatus.Failure;
-            }
-
-            this.SignIn(user, remember, remember);
-            return SignInStatus.Success;
-        }*/
-
         /// <summary>
         /// Verify login 
         /// </summary>
