@@ -7,47 +7,47 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebformsIntegratedBE_Standalone
+namespace WebformsIntegratedBE_Standalone.Account
 {
 
 
-    public partial class SiteMaster
+    public partial class CreateTenant
     {
 
         /// <summary>
-        /// CreateTenantContent control.
+        /// ErrorMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder CreateTenantContent;
+        protected global::System.Web.UI.WebControls.PlaceHolder ErrorMessage;
 
         /// <summary>
-        /// CreateUserContent control.
+        /// FailureText control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder CreateUserContent;
+        protected global::System.Web.UI.WebControls.Literal FailureText;
 
         /// <summary>
-        /// LoginContent control.
+        /// TenantID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder LoginContent;
+        protected global::System.Web.UI.WebControls.TextBox TenantID;
 
         /// <summary>
-        /// MainContent control.
+        /// TenantName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+        protected global::System.Web.UI.WebControls.TextBox TenantName;
     }
 }

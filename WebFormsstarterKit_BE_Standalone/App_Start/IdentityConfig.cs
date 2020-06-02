@@ -38,7 +38,7 @@ namespace WebformsIntegratedBE_Standalone
 
         public ApplicationUser FindTenantUser(string tenant, string username, string password)
         {
-            var context = ApplicationUserDbContext<ApplicationUser>.Create();
+            var context = ApplicationDbContext.Create();
 
             var user = context.Users
                 .Include(x => x.Tenant)
@@ -48,34 +48,33 @@ namespace WebformsIntegratedBE_Standalone
             return user;
         }
 
-        /// <summary>
-        /// Find out user 1. System Admin / 2. Normal user under tenant
-        /// </summary>
         public async Task<ApplicationUser> FindTenantUserAsync(string tenant, string username, string password)
         {
-            var context = ApplicationUserDbContext<ApplicationUser>.Create();
-            ApplicationUser user = null;
+            using (var context = ApplicationDbContext.Create())
+            {
+                ApplicationUser user = null;
 
-            user = tenant == null
-                ? await context.Users
-                    .Include(x => x.Tenant)
-                    .Where(x => x.UserName.Equals(username, StringComparison.InvariantCultureIgnoreCase))
-                    .SingleOrDefaultAsync()
-                : await context.Users
-                    .Include(x => x.Tenant)
-                    .Where(x => x.UserName.Equals(username, StringComparison.InvariantCultureIgnoreCase))
-                    .Where(x => x.Tenant.Name.Equals(tenant, StringComparison.InvariantCultureIgnoreCase))
-                    .SingleOrDefaultAsync();
+                user = tenant == null
+                    ? await context.Users
+                        .Include(x => x.Tenant)
+                        .Where(x => x.UserName.Equals(username, StringComparison.InvariantCultureIgnoreCase))
+                        .SingleOrDefaultAsync()
+                    : await context.Users
+                        .Include(x => x.Tenant)
+                        .Where(x => x.UserName.Equals(username, StringComparison.InvariantCultureIgnoreCase))
+                        .Where(x => x.Tenant.Name.Equals(tenant, StringComparison.InvariantCultureIgnoreCase))
+                        .SingleOrDefaultAsync();
 
-            if (await CheckPasswordAsync(user, password))
-                return user;
+                if (await CheckPasswordAsync(user, password))
+                    return user;
+            }
 
             return null;
         }
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
-            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationUserDbContext<ApplicationUser>>()));
+            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
             // Configure validation logic for usernames
             manager.UserValidator = new UserValidator<ApplicationUser>(manager)
             {
@@ -126,36 +125,23 @@ namespace WebformsIntegratedBE_Standalone
         public ApplicationSignInManager(ApplicationUserManager userManager, IAuthenticationManager authenticationManager) : base(userManager, authenticationManager) 
         { }
 
-        //public SignInStatus CustomSignIn(string tenant, string username, string password, bool remember)
-        //{
-        //    var appUserManager = this.UserManager as ApplicationUserManager;
-
-        //    var user = appUserManager?.FindTenantUser(tenant, username, password);
-        //    if (user == null)
-        //    {
-        //        return SignInStatus.Failure;
-        //    }
-
-        //    this.SignIn(user, remember, remember);
-        //    return SignInStatus.Success;
-        //}
-
         /// <summary>
         /// Verify login 
         /// </summary>
         public async Task<SignInStatus> PasswordSigninAsync(string tenant, string username, string password, bool remember)
         {
-            var appUserManager = UserManager as ApplicationUserManager;
-            
-            if (appUserManager == null)
-                return SignInStatus.Failure;
+            using (var appUserManager = UserManager as ApplicationUserManager)
+            {
+                if (appUserManager == null)
+                    return SignInStatus.Failure;
 
-            var user = await appUserManager.FindTenantUserAsync(tenant, username, password);
-          
-            if (user == null)
-                return SignInStatus.Failure;
+                var user = await appUserManager.FindTenantUserAsync(tenant, username, password);
 
-            await SignInAsync(user, remember, true);
+                if (user == null)
+                    return SignInStatus.Failure;
+
+                await SignInAsync(user, remember, true);
+            }
 
             return SignInStatus.Success;
         }
@@ -179,7 +165,7 @@ namespace WebformsIntegratedBE_Standalone
 
         public static ApplicationRoleManager Create(IdentityFactoryOptions<ApplicationRoleManager> options, IOwinContext context)
         {
-            var manager = new ApplicationRoleManager(new RoleStore<IdentityRole>(context.Get<ApplicationUserDbContext<ApplicationUser>>()));
+            var manager = new ApplicationRoleManager(new RoleStore<IdentityRole>(context.Get<ApplicationDbContext>()));
             return manager;
         }
     }

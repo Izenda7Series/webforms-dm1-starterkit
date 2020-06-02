@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
+using Microsoft.AspNet.Identity;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+
 
 namespace WebformsIntegratedBE_Standalone.Models
 {
@@ -33,11 +35,39 @@ namespace WebformsIntegratedBE_Standalone.Models
                     new Claim("tenantId",Tenant.Id.ToString()),
                 });
             }
+
             var role = (await manager.GetRolesAsync(this.Id)).FirstOrDefault();
             userIdentity.AddClaim(new Claim(ClaimsIdentity.DefaultRoleClaimType, role ?? string.Empty));
 
             // Add custom user claims here
             return userIdentity;
+        }
+        #endregion
+    }
+
+    public class Tenant
+    {
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+    }
+
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    {
+        #region Properties
+        public virtual IDbSet<Tenant> Tenants { get; set; } 
+        #endregion
+
+        #region CTOR
+        public ApplicationDbContext() 
+            : base("DefaultConnection", throwIfV1Schema: false)
+        { }
+        #endregion
+
+        #region Methods
+        public static ApplicationDbContext Create()
+        {
+            return new ApplicationDbContext();
         }
         #endregion
     }

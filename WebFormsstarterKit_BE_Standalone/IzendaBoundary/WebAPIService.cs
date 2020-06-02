@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 
 namespace WebformsIntegratedBE_Standalone.IzendaBoundary
 {
@@ -70,6 +71,29 @@ namespace WebformsIntegratedBE_Standalone.IzendaBoundary
                 {
                     throw new WebApiException(url, httpResponse.StatusCode, ex);
                 }
+            }
+        }
+
+        public async Task<bool> PostReturnBooleanAsync<T>(string action, T data, string authToken = null)
+        {
+            using (var httpClient = GetHttpClient(authToken))
+            {
+                var url = BuildActionUri(action);
+                var httpResponse = await httpClient.PostAsJsonAsync(url, data);
+
+                try
+                {
+                    httpResponse.EnsureSuccessStatusCode();
+                }
+                catch (Exception ex)
+                {
+                    throw new WebApiException(url, httpResponse.StatusCode, ex);
+                }
+
+                var responseJson = await httpResponse.Content.ReadAsStringAsync();
+                var result = (bool)JObject.Parse(responseJson)["success"];
+
+                return result;
             }
         }
 
