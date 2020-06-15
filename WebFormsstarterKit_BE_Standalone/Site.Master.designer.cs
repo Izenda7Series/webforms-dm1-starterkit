@@ -24,6 +24,24 @@ namespace WebformsIntegratedBE_Standalone
         protected global::System.Web.UI.WebControls.ContentPlaceHolder CreateTenantContent;
 
         /// <summary>
+        /// CreateTenantSuccessContent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder CreateTenantSuccessContent;
+
+        /// <summary>
+        /// FailedToCreateTenantContent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder FailedToCreateTenantContent;
+
+        /// <summary>
         /// CreateUserContent control.
         /// </summary>
         /// <remarks>
@@ -31,6 +49,24 @@ namespace WebformsIntegratedBE_Standalone
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ContentPlaceHolder CreateUserContent;
+
+        /// <summary>
+        /// CreateUserSuccessContent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder CreateUserSuccessContent;
+
+        /// <summary>
+        /// FailedToCreateUserContent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder FailedToCreateUserContent;
 
         /// <summary>
         /// LoginContent control.

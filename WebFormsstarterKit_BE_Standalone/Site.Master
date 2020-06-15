@@ -141,7 +141,23 @@
         </div>
 
         <div class="container body-content">
+            <asp:ContentPlaceHolder ID="CreateTenantSuccessContent" runat="server"></asp:ContentPlaceHolder>
+        </div>
+
+        <div class="container body-content">
+            <asp:ContentPlaceHolder ID="FailedToCreateTenantContent" runat="server"></asp:ContentPlaceHolder>
+        </div>
+
+        <div class="container body-content">
             <asp:ContentPlaceHolder ID="CreateUserContent" runat="server"></asp:ContentPlaceHolder>
+        </div>
+
+        <div class="container body-content">
+            <asp:ContentPlaceHolder ID="CreateUserSuccessContent" runat="server"></asp:ContentPlaceHolder>
+        </div>
+
+         <div class="container body-content">
+            <asp:ContentPlaceHolder ID="FailedToCreateUserContent" runat="server"></asp:ContentPlaceHolder>
         </div>
 
         <div class="container body-content">

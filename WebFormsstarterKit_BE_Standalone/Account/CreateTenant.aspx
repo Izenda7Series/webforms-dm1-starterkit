@@ -3,27 +3,6 @@
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="CreateTenantContent">
     <h2><%: Title %></h2>
 
-    <% if (createdSuccessfully != null && !(bool)createdSuccessfully)
-        { %>
-    <div class="alert alert-danger alert-dismissable">
-        <strong>Can't create a new tenant. The tenant name or id already exists.</strong>
-    </div>
-    <% } %>
-
-    <% if (createdSuccessfully == null && serverError)
-        { %>
-    <div class="alert alert-danger alert-dismissable">
-        <strong>Server does not allow your request.</strong>
-    </div>
-    <% } %>
-
-    <% if (createdSuccessfully != null && (bool)createdSuccessfully)
-        { %>
-    <div class="alert alert-success alert-dismissable">
-        <strong>Tenant has been created successfully.</strong>
-    </div>
-    <% } %>
-
     <div class="row">
         <div class="col-md-8">
             <section id="CreateTenantForm">

@@ -3,27 +3,6 @@
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="CreateUserContent">
     <h2><%: Title %></h2>
 
-    <% if (createdSuccessfully != null && !(bool)createdSuccessfully)
-        { %>
-    <div class="alert alert-danger alert-dismissable">
-        <strong>Can't create a new user. The user name or id already exists.</strong>
-    </div>
-    <% } %>
-
-    <% if (createdSuccessfully == null && serverError)
-        { %>
-    <div class="alert alert-danger alert-dismissable">
-        <strong>Server does not allow your request.</strong>
-    </div>
-    <% } %>
-
-    <% if (createdSuccessfully != null && (bool)createdSuccessfully)
-        { %>
-    <div class="alert alert-success alert-dismissable">
-        <strong>User has been created successfully.</strong>
-    </div>
-    <% } %>
-
     <div class="row">
         <div class="col-md-8">
             <section id="CreateTenantForm">
@@ -49,6 +28,14 @@
                                 <asp:CheckBox runat="server" ID="IsAdminCheckBox" />
                                 <asp:Label runat="server" AssociatedControlID="IsAdminCheckBox">Is Admin</asp:Label>
                             </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <asp:Label runat="server" AssociatedControlID="RoleList" CssClass="col-md-2 control-label">Selected Role</asp:Label>
+                        <div class="col-md-10">
+                            <asp:DropDownList ID="RoleList" CssClass="form-control" runat="server" AppendDataBoundItems="true" AutoPostBack="true">
+                                <asp:ListItem Value=""></asp:ListItem>
+                            </asp:DropDownList>
                         </div>
                     </div>
                     <div class="form-group">
