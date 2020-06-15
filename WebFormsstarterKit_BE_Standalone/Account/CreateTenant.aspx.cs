@@ -7,20 +7,9 @@ namespace WebformsIntegratedBE_Standalone.Account
 {
     public partial class CreateTenant : Page
     {
-        #region Variables
-        public static bool? createdSuccessfully = null;
-        public static bool serverError = false;
-        #endregion
-
         #region Methods
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                // back to default status
-                createdSuccessfully = null;
-                serverError = false;
-            }
         }
 
         protected async void Submit(object sender, EventArgs e)
@@ -39,21 +28,28 @@ namespace WebformsIntegratedBE_Standalone.Account
                     {
                         var newTenant = new Tenant() { Name = TenantName.Text };
                         await IzendaUtilities.SaveTenantAsync(newTenant);
-
-                        createdSuccessfully = true;
+                       
+                        RedirectResultPage(true);
                     }
                     else // failed at server level
                     {
-                        createdSuccessfully = null;
-                        serverError = true;
+                        RedirectResultPage(false);
                     }
                 }
                 else
-                    createdSuccessfully = false;
+                    RedirectResultPage(false);
             }
             else
-                createdSuccessfully = false;
-        } 
+                RedirectResultPage(false);
+        }
+
+        private void RedirectResultPage(bool success)
+        {
+            if (success)
+                Response.Redirect("~/Account/CreateTenantSuccess.aspx");
+            else
+                Response.Redirect("~/Account/FailedToCreateTenant.aspx", false);
+        }
         #endregion
     }
 }

@@ -202,7 +202,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Account\CreateTenant.aspx" />
+    <Content Include="Account\CreateTenantSuccess.aspx" />
     <Content Include="Account\CreateUser.aspx" />
+    <Content Include="Account\CreateUserSuccess.aspx" />
+    <Content Include="Account\FailedToCreateTenant.aspx" />
+    <Content Include="Account\FailedToCreateUser.aspx" />
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\OpenAuthProviders.ascx" />
     <Content Include="Content\bootstrap.css" />
@@ -280,12 +284,40 @@
     <Compile Include="Account\CreateTenant.aspx.designer.cs">
       <DependentUpon>CreateTenant.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Account\CreateTenantSuccess.aspx.cs">
+      <DependentUpon>CreateTenantSuccess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\CreateTenantSuccess.aspx.designer.cs">
+      <DependentUpon>CreateTenantSuccess.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Account\CreateUser.aspx.cs">
       <DependentUpon>CreateUser.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Account\CreateUser.aspx.designer.cs">
       <DependentUpon>CreateUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\CreateUserSuccess.aspx.cs">
+      <DependentUpon>CreateUserSuccess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\CreateUserSuccess.aspx.designer.cs">
+      <DependentUpon>CreateUserSuccess.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\FailedToCreateTenant.aspx.cs">
+      <DependentUpon>FailedToCreateTenant.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\FailedToCreateTenant.aspx.designer.cs">
+      <DependentUpon>FailedToCreateTenant.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\FailedToCreateUser.aspx.cs">
+      <DependentUpon>FailedToCreateUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\FailedToCreateUser.aspx.designer.cs">
+      <DependentUpon>FailedToCreateUser.aspx</DependentUpon>
     </Compile>
     <Compile Include="Account\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
