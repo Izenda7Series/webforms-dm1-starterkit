@@ -5,6 +5,9 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using System;
 using System.Data.Entity;
+using System.Diagnostics;
+using System.DirectoryServices;
+using System.DirectoryServices.AccountManagement;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -72,6 +75,27 @@ namespace WebformsIntegratedBE_Standalone
             return null;
         }
 
+        public async Task<ApplicationUser> FindTenantUserAsync(string tenant, string username)
+        {
+            using (var context = ApplicationDbContext.Create())
+            {
+                ApplicationUser user = null;
+
+                user = tenant == null
+                    ? await context.Users
+                        .Include(x => x.Tenant)
+                        .Where(x => x.UserName.Equals(username, StringComparison.InvariantCultureIgnoreCase))
+                        .SingleOrDefaultAsync()
+                    : await context.Users
+                        .Include(x => x.Tenant)
+                        .Where(x => x.UserName.Equals(username, StringComparison.InvariantCultureIgnoreCase))
+                        .Where(x => x.Tenant.Name.Equals(tenant, StringComparison.InvariantCultureIgnoreCase))
+                        .SingleOrDefaultAsync();
+
+                return user;
+            }
+        }
+
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
             var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
@@ -123,7 +147,8 @@ namespace WebformsIntegratedBE_Standalone
     public class ApplicationSignInManager : SignInManager<ApplicationUser, string>
     {
         public ApplicationSignInManager(ApplicationUserManager userManager, IAuthenticationManager authenticationManager) : base(userManager, authenticationManager) 
-        { }
+        {
+        }
 
         /// <summary>
         /// Verify login 
@@ -144,6 +169,94 @@ namespace WebformsIntegratedBE_Standalone
             }
 
             return SignInStatus.Success;
+        }
+
+        /// <summary>
+        /// Sign in using active directory
+        /// </summary>
+        public async Task<SignInStatus> ActiveDirectorySigninAsync(string tenant, string email, string password, bool remember)
+        {
+            string currentUserName = Environment.UserName; // debug - check current AD user name
+
+            var userName = email.Split('@').FirstOrDefault();
+            var userDomainName = Environment.UserDomainName;
+            ContextType authenticationType = ContextType.Domain;
+            UserPrincipal userPrincipal = null;
+            bool isAuthenticated = false;
+
+            if (!string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(userDomainName))
+            {
+                //CheckAllActiveDirectoryUser(); // only for debugging purpose
+
+                using (var context = new PrincipalContext(authenticationType, Environment.UserDomainName))
+                {
+                    try
+                    {
+                        userPrincipal = UserPrincipal.FindByIdentity(context, IdentityType.SamAccountName, userName);
+
+                        if (userPrincipal != null)
+                        {
+                            // Validate credential with Active Directory information
+                            isAuthenticated = context.ValidateCredentials(userName, password, ContextOptions.Negotiate);
+
+                            if (isAuthenticated)
+                            {
+                                using (var appUserManager = UserManager as ApplicationUserManager)
+                                {
+                                    // retrieve tenant information after validation process
+                                    var user = await appUserManager.FindTenantUserAsync(tenant, email);
+
+                                    if (user != null)
+                                    {
+                                        await SignInAsync(user, remember, true);
+
+                                        return SignInStatus.Success;
+                                    }
+                                    else
+                                        return SignInStatus.Failure;
+                                }
+                            }
+                            else
+                                return SignInStatus.Failure;
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.WriteLine(e);
+                        return SignInStatus.Failure;
+                    }
+
+                    if (!isAuthenticated)
+                        return SignInStatus.Failure;
+
+                    if (userPrincipal.IsAccountLockedOut())
+                        return SignInStatus.LockedOut;
+
+                    if (userPrincipal.Enabled.HasValue && userPrincipal.Enabled.Value == false)
+                        return SignInStatus.Failure;
+                }
+            }
+            
+            return SignInStatus.Failure;
+        }
+
+        /// <summary>
+        /// Check list of Active Directory users
+        /// </summary>
+        private void CheckAllActiveDirectoryUser()
+        {
+            using (var context = new PrincipalContext(ContextType.Domain, Environment.UserDomainName))
+            using (var searcher = new PrincipalSearcher(new UserPrincipal(context)))
+            {
+                foreach (var result in searcher.FindAll())
+                {
+                    DirectoryEntry de = result.GetUnderlyingObject() as DirectoryEntry;
+                    Debug.WriteLine("First Name: " + de.Properties["givenName"].Value);
+                    Debug.WriteLine("Last Name : " + de.Properties["sn"].Value);
+                    Debug.WriteLine("SAM account name   : " + de.Properties["samAccountName"].Value);
+                    Debug.WriteLine("User principal name: " + de.Properties["userPrincipalName"].Value);
+                }
+            }
         }
 
         public override Task<ClaimsIdentity> CreateUserIdentityAsync(ApplicationUser user)

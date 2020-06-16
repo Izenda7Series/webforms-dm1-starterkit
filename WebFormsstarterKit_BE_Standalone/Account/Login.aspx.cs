@@ -18,9 +18,14 @@ namespace WebformsIntegratedBE_Standalone.Account
         {
             if (IsValid)
             {
-                // Validate the user password
+                bool activeDirectoryLogin = true; // active directory login 
+                SignInStatus result = SignInStatus.Failure;
                 var signinManager = Context.GetOwinContext().GetUserManager<ApplicationSignInManager>();
-                var result = await signinManager.PasswordSigninAsync(string.IsNullOrEmpty(Tenant.Text) ? null : Tenant.Text, Email.Text, Password.Text, RememberMe.Checked);
+
+                if (activeDirectoryLogin && !string.IsNullOrEmpty(Tenant.Text)) // exclude system level case
+                    result = await signinManager.ActiveDirectorySigninAsync(string.IsNullOrEmpty(Tenant.Text) ? null : Tenant.Text, Email.Text, Password.Text, RememberMe.Checked);
+                else
+                    result = await signinManager.PasswordSigninAsync(string.IsNullOrEmpty(Tenant.Text) ? null : Tenant.Text, Email.Text, Password.Text, RememberMe.Checked);
 
                 switch (result)
                 {

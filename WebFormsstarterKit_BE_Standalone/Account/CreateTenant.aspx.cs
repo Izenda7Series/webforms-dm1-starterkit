@@ -28,7 +28,7 @@ namespace WebformsIntegratedBE_Standalone.Account
                     {
                         var newTenant = new Tenant() { Name = TenantID.Text };
                         await IzendaUtilities.SaveTenantAsync(newTenant);
-                       
+
                         RedirectResultPage(true);
                     }
                     else // failed at server level
