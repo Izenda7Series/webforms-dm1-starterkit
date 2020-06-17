@@ -82,7 +82,7 @@ namespace WebformsIntegratedBE_Standalone.IzendaBoundary
         /// </summary>
         public static async Task<bool> CreateTenant(string tenantName, string tenantId, string authToken)
         {
-            var existingTenant = await GetIzendaTenantByName(tenantName, authToken);
+            var existingTenant = await GetIzendaTenantByName(tenantId, authToken);
             if (existingTenant != null)
                 return false;
 
@@ -155,7 +155,7 @@ namespace WebformsIntegratedBE_Standalone.IzendaBoundary
         {
             var tenants = await WebAPIService.Instance.GetAsync<IList<TenantDetail>>("/tenant/allTenants", authToken);
             if (tenants != null)
-                return tenants.FirstOrDefault(x => x.Name.Equals(tenantName, StringComparison.InvariantCultureIgnoreCase));
+                return tenants.FirstOrDefault(x => x.TenantId.Equals(tenantName, StringComparison.InvariantCultureIgnoreCase));
 
             return null;
         }
