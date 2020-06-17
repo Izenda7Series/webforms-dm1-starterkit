@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -57,12 +58,20 @@ namespace WebformsIntegratedBE_Standalone.Account
 
                 if (result.Succeeded) // if successful, then start creating a user at Izenda DB
                 {
-                    var assignedRole = RoleList.SelectedValue ?? "Employee"; // set default role if required. As an example, Employee is set by default
+                    var assignedRole = !string.IsNullOrEmpty(RoleList.SelectedValue) ? RoleList.SelectedValue : "Employee"; // set default role if required. As an example, Employee is set by default
 
-                    if (roleManager.RoleExists(assignedRole)) // check assigned role exist in client DB, if not assigned role is null
-                        result = await userManager.AddToRoleAsync(appUser.Id, assignedRole);
-                    else
-                        assignedRole = null;
+                    if (!roleManager.RoleExists(assignedRole)) // check assigned role exist in client DB. if not, assigned role is null
+                    {
+                        try
+                        {
+                            await roleManager.CreateAsync(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole(assignedRole));
+                            result = await userManager.AddToRoleAsync(appUser.Id, assignedRole);
+                        }
+                        catch (Exception ex)
+                        {
+                            Debug.WriteLine(ex);
+                        }
+                    }
 
                     if (result.Succeeded)
                     {
