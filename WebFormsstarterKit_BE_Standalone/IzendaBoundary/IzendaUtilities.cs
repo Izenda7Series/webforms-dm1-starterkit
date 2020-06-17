@@ -82,7 +82,7 @@ namespace WebformsIntegratedBE_Standalone.IzendaBoundary
         /// </summary>
         public static async Task<bool> CreateTenant(string tenantName, string tenantId, string authToken)
         {
-            var existingTenant = await GetIzendaTenantByName(tenantName, authToken);
+            var existingTenant = await GetIzendaTenantByName(tenantId, authToken);
             if (existingTenant != null)
                 return false;
 
