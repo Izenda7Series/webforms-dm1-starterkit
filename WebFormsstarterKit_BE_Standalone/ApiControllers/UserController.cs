@@ -34,7 +34,7 @@ namespace WebformsIntegratedBE_Standalone.ApiControllers
 
         [HttpGet]
         [AllowAnonymous]
-        [Route("GetToken")]
+        [Route("GetIzendaAccessToken")]
         public IHttpActionResult GetIzendaAccessToken(string message)
         {
             var userInfo = IzendaBoundary.IzendaTokenAuthorization.DecryptIzendaAuthenticationMessage(message);
