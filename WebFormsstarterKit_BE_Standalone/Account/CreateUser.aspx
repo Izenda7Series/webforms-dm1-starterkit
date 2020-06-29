@@ -14,6 +14,10 @@
                             <asp:Literal runat="server" ID="FailureText" />
                         </p>
                     </asp:PlaceHolder>
+                     <asp:ValidationSummary DisplayMode="BulletList"
+                                            EnableClientScript="true"
+                                            CssClass="text-danger"
+                                            runat="server"/>
                     <div class="form-group">
                         <asp:Label runat="server" AssociatedControlID="TenantList" CssClass="col-md-2 control-label">Tenant*</asp:Label>
                         <div class="col-md-10">
