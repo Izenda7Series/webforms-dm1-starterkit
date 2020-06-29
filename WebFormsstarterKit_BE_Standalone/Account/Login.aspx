@@ -16,12 +16,14 @@
                             <asp:Literal runat="server" ID="FailureText" />
                         </p>
                     </asp:PlaceHolder>
+                    <asp:ValidationSummary DisplayMode="BulletList"
+                                           EnableClientScript="true"
+                                           CssClass="text-danger"
+                                           runat="server"/>
                     <div class="form-group">
                         <asp:Label runat="server" AssociatedControlID="Tenant" CssClass="col-md-2 control-label">Tenant</asp:Label>
                         <div class="col-md-10">
-                            <asp:TextBox runat="server" ID="Tenant" CssClass="form-control" />
-                            <%--System admin does not require for this field. Currently set to false. If you want to set this as required, please add a logic to bypass System admin case--%>
-                            <asp:RequiredFieldValidator runat="server" Display="Dynamic" ControlToValidate="Tenant" CssClass="text-danger" ErrorMessage="The tenant field is required." Enabled="false" />
+                            <asp:TextBox runat="server" ID="Tenant" placeholder="System level login does not require tenant field input" CssClass="form-control" />
                         </div>
                     </div>
                     <div class="form-group">
