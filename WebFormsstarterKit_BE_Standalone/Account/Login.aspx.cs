@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity.Owin;
 using System;
+using System.Configuration;
 using System.Web;
 using System.Web.UI;
 
@@ -18,12 +19,17 @@ namespace WebformsIntegratedBE_Standalone.Account
         {
             if (IsValid)
             {
-                bool activeDirectoryLogin = true; // active directory login 
-                SignInStatus result = SignInStatus.Failure;
+                var useADlogin = ConfigurationManager.AppSettings["useADlogin"]; // if you want to enable active directory login, then set this boolean value to true (Web.config). Default is false.
                 var signinManager = Context.GetOwinContext().GetUserManager<ApplicationSignInManager>();
+                var result = SignInStatus.Failure;
 
-                if (activeDirectoryLogin && !string.IsNullOrEmpty(Tenant.Text)) // exclude system level case
-                    result = await signinManager.ActiveDirectorySigninAsync(string.IsNullOrEmpty(Tenant.Text) ? null : Tenant.Text, Email.Text, Password.Text, RememberMe.Checked);
+                if (useADlogin.Equals("true") && !string.IsNullOrEmpty(Tenant.Text)) // if tenant is null, then assume that it is system level login. Go to the ValidateLogin which is used for regular login process first
+                {
+                    // If we allow AD authentication, then email / password field are not required because it can be retrieved from active directory information.
+                    // You can remove those fields from front-end UI. 
+                    // However, tenant field is required because it is used for GetToken.
+                    result = await signinManager.ADSigninAsync(string.IsNullOrEmpty(Tenant.Text) ? null : Tenant.Text, Password.Text, RememberMe.Checked);
+                }
                 else
                     result = await signinManager.PasswordSigninAsync(string.IsNullOrEmpty(Tenant.Text) ? null : Tenant.Text, Email.Text, Password.Text, RememberMe.Checked);
 

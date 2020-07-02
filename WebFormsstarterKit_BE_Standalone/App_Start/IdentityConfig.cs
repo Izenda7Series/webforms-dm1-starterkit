@@ -172,15 +172,15 @@ namespace WebformsIntegratedBE_Standalone
         }
 
         /// <summary>
-        /// Sign in using active directory
+        /// Login with Active Directory information.
+        /// Please refer to the following link to get more information on Active Directory 
+        /// https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview
         /// </summary>
-        public async Task<SignInStatus> ActiveDirectorySigninAsync(string tenant, string email, string password, bool remember)
+        public async Task<SignInStatus> ADSigninAsync(string tenant, string password, bool remember)
         {
-            string currentUserName = Environment.UserName; // debug - check current AD user name
-
-            var userName = email.Split('@').FirstOrDefault();
+            var userName = Environment.UserName;
             var userDomainName = Environment.UserDomainName;
-            ContextType authenticationType = ContextType.Domain;
+            var authenticationType = ContextType.Domain;
             UserPrincipal userPrincipal = null;
             bool isAuthenticated = false;
 
@@ -196,7 +196,10 @@ namespace WebformsIntegratedBE_Standalone
 
                         if (userPrincipal != null)
                         {
-                            // Validate credential with Active Directory information
+                            var email = userPrincipal.EmailAddress;
+
+                            // Validate credential with Active Directory information. This is optional for authentication process.
+                            // If you want check password one more time, you can check here. Otherwise, you need to remove password from parameter and skip this and set isAuthencate as true since userPrincipal is not null.
                             isAuthenticated = context.ValidateCredentials(userName, password, ContextOptions.Negotiate);
 
                             if (isAuthenticated)
@@ -208,6 +211,7 @@ namespace WebformsIntegratedBE_Standalone
 
                                     if (user != null)
                                     {
+                                        // now you can sign in with correct authticated user
                                         await SignInAsync(user, remember, true);
 
                                         return SignInStatus.Success;
