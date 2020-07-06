@@ -19,7 +19,10 @@ namespace WebformsIntegratedBE_Standalone.Account
         {
             if (IsValid)
             {
-                var useADlogin = ConfigurationManager.AppSettings["useADlogin"]; // if you want to enable active directory login, then set this boolean value to true (Web.config). Default is false.
+                bool useADlogin;
+                var adLoginSetting = ConfigurationManager.AppSettings["useADlogin"]; // if you want to enable active directory login, then set this boolean value to true (Web.config). Default is false.
+                bool.TryParse(adLoginSetting, out useADlogin);
+
                 var signinManager = Context.GetOwinContext().GetUserManager<ApplicationSignInManager>();
                 var result = SignInStatus.Failure;
 

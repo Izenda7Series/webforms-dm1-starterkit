@@ -236,7 +236,7 @@ namespace WebformsIntegratedBE_Standalone
                     if (userPrincipal.IsAccountLockedOut())
                         return SignInStatus.LockedOut;
 
-                    if (userPrincipal.Enabled.HasValue && userPrincipal.Enabled.Value == false)
+                    if (userPrincipal.Enabled.HasValue && !userPrincipal.Enabled.Value)
                         return SignInStatus.Failure;
                 }
             }
