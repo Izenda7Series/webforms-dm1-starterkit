@@ -26,7 +26,7 @@ namespace WebformsIntegratedBE_Standalone.Account
                 var signinManager = Context.GetOwinContext().GetUserManager<ApplicationSignInManager>();
                 var result = SignInStatus.Failure;
 
-                if (useADlogin.Equals("true") && !string.IsNullOrEmpty(Tenant.Text)) // if tenant is null, then assume that it is system level login. Go to the ValidateLogin which is used for regular login process first
+                if (useADlogin && !string.IsNullOrEmpty(Tenant.Text)) // if tenant is null, then assume that it is system level login. Go to the ValidateLogin which is used for regular login process first
                 {
                     // If we allow AD authentication, then email / password field are not required because it can be retrieved from active directory information.
                     // You can remove those fields from front-end UI. 
