@@ -121,7 +121,6 @@ namespace WebformsIntegratedBE_Standalone.Account
             var selectList = new List<string>();
             var selectedTenant = TenantList.SelectedValue;
             var adminToken = IzendaTokenAuthorization.GetIzendaAdminToken();
-
             var izendaTenant = await IzendaUtilities.GetIzendaTenantByName(selectedTenant, adminToken);
             var roleDetailsByTenant = await IzendaUtilities.GetAllIzendaRoleByTenant(izendaTenant?.Id ?? null, adminToken);
             roleDetailsByTenant.ForEach(r => selectList.Add(r.Name));
