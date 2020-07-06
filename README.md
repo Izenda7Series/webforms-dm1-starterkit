@@ -34,8 +34,6 @@ This Starterkit showcases how to embed the front-end of Izenda into a WebForms a
 
 Create the Retail database with the retail.sql inside DBScripts folder.
 
- 
-
 ### Deploying the WebForms Kit
 
 izenda.integrate.js
@@ -59,6 +57,8 @@ Download the <a href="https://downloads.izenda.com/v3.8.4/EmbeddedUI.zip">Izenda
 
 e.g. value= 1 (BE Standlaone and FE integrated)
  
+### Active Directory Authentication (optional)
+if you want to use Active Directory authentication, set useADlogin value in web.config to true.
 
 ### Initial Log in
 
