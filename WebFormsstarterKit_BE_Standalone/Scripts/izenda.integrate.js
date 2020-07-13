@@ -24,6 +24,7 @@ function errorFunc() {
     // confirm dialog
     alertify.confirm("Your token was not generated correctly, please login.", function () {
         // user clicked "ok"
+        location.href = "/Account/Login";
     }, function() {
         // user clicked "cancel"
     });
