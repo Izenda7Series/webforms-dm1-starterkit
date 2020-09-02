@@ -12,7 +12,7 @@ namespace WebformsIntegratedBE_Standalone.Report
         #region Methods
         protected void Page_Load(object sender, EventArgs e) 
         {
-            ReportId = (Page.RouteData.Values["id"] + string.Empty);
+            ReportId = Page.RouteData.Values["id"] as string;
         }
         #endregion
     }

@@ -12,7 +12,7 @@ namespace WebformsIntegratedBE_Standalone.Dashboard
         #region Methods
         protected void Page_Load(object sender, EventArgs e) 
         {
-            DashboardId = (Page.RouteData.Values["id"] + string.Empty);
+            DashboardId = Page.RouteData.Values["id"] as string;
         }
         #endregion
     }
