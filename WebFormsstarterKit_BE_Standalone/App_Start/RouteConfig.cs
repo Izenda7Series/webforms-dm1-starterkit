@@ -20,14 +20,14 @@ namespace WebformsIntegratedBE_Standalone
 
             routes.MapPageRoute(
                 routeName: "ReportViewer",
-                routeUrl: "report/view/",
+                routeUrl: "izenda/report/view/{id}",
                 physicalFile: "~/report/ReportViewer.aspx",
                 checkPhysicalUrlAccess: false
             );
 
             routes.MapPageRoute(
                 routeName: "DashboardViewer",
-                routeUrl: "dashboard/view/",
+                routeUrl: "izenda/dashboard/view/{id}",
                 physicalFile: "~/Dashboard/DashboardViewer.aspx",
                 checkPhysicalUrlAccess: false
             );

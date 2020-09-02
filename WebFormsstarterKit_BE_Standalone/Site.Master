@@ -76,9 +76,8 @@
                                 <li><a runat="server" href="~/Report/ReportDesigner">New Report</a></li>
                                 <li><a runat="server" href="~/Report/Reports">Report List</a></li>
 
-                                <%--Add to report Viewer to Demo, hardcode Report ID to link user to a specific report 
-                                    please update the ReportId with one created in your enviroment (ReportViewer.aspx.cs)--%>
-                                <li><a runat="server" href="~/report/view/">Report Viewer</a></li>
+                                <%--Add to report Viewer to Demo, please input your report ID here--%>
+                                <li><a runat="server" href="izenda/Report/view/[YOUR ID]">Report Viewer</a></li>
 
                                 <li><a runat="server" href="~/Report/ReportParts">Report Parts</a></li>
                             </ul>
@@ -93,9 +92,8 @@
                                 <li><a runat="server" href="~/Dashboard/DashboardDesigner">New Dashboard</a></li>
                                 <li><a runat="server" href="~/Dashboard/Dashboards">Dashboards</a></li>
 
-                                <%--Add to dashboard Viewer to Demo, hardcode Dashboard ID to link user to a specific dashboard
-                                    please update the DashboardId property with one created in your enviroment (DashboardViewer.aspx.cs)--%>
-                                <li><a runat="server" href="~/dashboard/view/">Dashboard Viewer</a></li>
+                                <%--Add to dashboard Viewer to Demo, please input your dashboard ID here--%>
+                                <li><a runat="server" href="izenda/dashboard/view/[YOUR ID]">Dashboard Viewer</a></li>
                             </ul>
                         </li>
                         <% } %>
