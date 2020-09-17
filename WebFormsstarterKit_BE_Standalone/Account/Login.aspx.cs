@@ -37,7 +37,7 @@ namespace WebformsIntegratedBE_Standalone.Account
                 switch (result)
                 {
                     case SignInStatus.Success:
-                        IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
+                        RouteHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
                         break;
 
                     case SignInStatus.LockedOut:

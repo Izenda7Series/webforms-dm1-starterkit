@@ -3,7 +3,7 @@ using System.Web;
 
 namespace WebformsIntegratedBE_Standalone
 {
-    public static class IdentityHelper
+    public static class RouteHelper
     {
         #region Methods
         private static bool IsLocalUrl(string url)

@@ -10,17 +10,17 @@ This Starterkit showcases how to embed the front-end of Izenda into a WebForms a
 
  :warning: The WebForms Kit is designed for demonstration purposes and should not be used as an “as-is” fully-integrated solution. You can use the kit for reference or a baseline but ensure that security and customization meet the standards of your company.
  
- :warning: This deployment is currently using version 3.8.4. If you wish to update to a later version, ensure that you run the appropriate schema migration scripts.
-
 ### Deploying the standalone API and Izenda Configuration Database
 
-- Download and deploy the <a href="https://downloads.izenda.com/v3.8.4/API_AspNet.zip">Izenda API</a> to IIS.
+- Visit <a href="https://downloads.izenda.com">Izenda resource site</a> and download / deploy the Izenda API to IIS. You need to create an API folder in your IIS and paste all Izenda API contents into that folder. 
 
-- Run the IzendaWebFromsBEStandalone.sql inside DBScripts folder to create a database named 'IzendaWebFromsBEStandalone' (This is the database for the Izenda configuration. It contains report definitions, dashboards,etc.). You may use any name of your choosing, just be sure to modify the script to USE the new database name.
+- Run the IzendaWebFromsBEStandalone.sql under the DBScript folder to create a database named 'IzendaWebFromsBEStandalone' (This is the database for the Izenda configuration. It contains report definitions, dashboards,etc.). You may use any name of your choosing, just be sure to modify the script to USE the new database name.
+
+- Create a izendadb.config with inserting following line : {"ServerTypeId":"572bd576-8c92-4901-ab2a-b16e38144813","ServerTypeName":"[MSSQL] SQLServer","ConnectionString":"[YOUR CONNECTION STRING]","ConnectionId":"00000000-0000-0000-0000-000000000000"} You need to update your ConnectionString. If the connection string contains a ‘/’, ensure that you escape it ‘//’ The ServerTypeId and ServerTypeName can be updated too based on your database type. For more information, please refer to [this](https://www.izenda.com/docs/ref/api_systemdb_and_license.html#get-databasesetup-supporteddatabasetype).
+
+- Insert izendadb.config file into the root of your API deployment.
 
 - Check IzendaWebFromsBEStandalone database version and update it if migration required <a href="https://tools.izenda.com/">Izenda Migration Assistant</a> 
-
-- Download a copy of the <a href="https://downloads.izenda.com/Utilities/izendadb.config">izendadb.config</a> file, and copy it to the root of your API deployment. Then modify the file with a valid connection string to this new database. If the connection string contains a ‘/’, ensure that you escape it ‘//’
 
 - In the IzendaSystemSettings table, update AuthValidateAccessTokenUrl to be fully qualified with the Starterkit's base address. e.g. api/account/validateIzendaAuthToken --> http://localhost:15621/api/user/validateIzendaAuthToken
 
@@ -28,23 +28,25 @@ This Starterkit showcases how to embed the front-end of Izenda into a WebForms a
 
 ### Deploying the WebForms Starter Kit Database
 
-- Run the WebFromsBEStandalone.sql inside DBScripts folder to create a database named 'WebFromsBEStandalone'. This is the database for the .NET application. It contains the users, roles, tenants used to login. You may use any name of your choosing, just be sure to modify the script to USE the new database name.
+- Run the WebFromsBEStandalone.sql under the DBScript folder to create a database named 'WebFromsBEStandalone'. This is the database for the .NET application. It contains the users, roles, tenants used to login. You may use any name of your choosing, just be sure to modify the script to USE the new database name.
 
 ### Deploying the Retail Database (optional)
 
-Create the Retail database with the retail.sql inside DBScripts folder.
+Create the Retail database with the retail.sql inside DBScript folder.
 
 ### Deploying the WebForms Kit
 
 izenda.integrate.js
 
-- If required, modify the hostApi to point to the port of your Izenda API. Default port number is 5101.
+- Modify the hostApi to point to the port of your Izenda API.
 
 Web.Config
 
-- Update the connection string to point to your WebForms database.
+- Update the connection string to point to your WebFormsBEStandalone database.
+- Update the IzendaApiUrl to point to the port of your Izenda API.
 
-Download the <a href="https://downloads.izenda.com/v3.8.4/EmbeddedUI.zip">Izenda Embedded UI</a>, and copy/paste the files into the Scripts/izenda folder.
+Create a izenda folder under the Scripts. Download the Izenda Embedded UI from <a href="https://downloads.izenda.com">Izenda resource site</a> , and copy/store the files into the Scripts/izenda folder.
+
 
 ### Update RSA Keys
 
