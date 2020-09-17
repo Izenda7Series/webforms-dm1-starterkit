@@ -2,7 +2,6 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -74,6 +73,10 @@ namespace WebformsIntegratedBE_Standalone.IzendaBoundary
             }
         }
 
+        /// <summary>
+        /// POST Tenant / User
+        /// Return result as boolean value
+        /// </summary>
         public async Task<bool> PostReturnBooleanAsync<T>(string action, T data, string authToken = null)
         {
             using (var httpClient = GetHttpClient(authToken))
@@ -103,6 +106,7 @@ namespace WebformsIntegratedBE_Standalone.IzendaBoundary
             {
                 var url = BuildActionUri(action);
                 var httpResponse = await httpClient.PostAsJsonAsync(url, data);
+
                 try
                 {
                     httpResponse.EnsureSuccessStatusCode();
@@ -112,11 +116,26 @@ namespace WebformsIntegratedBE_Standalone.IzendaBoundary
                     throw new WebApiException(url, httpResponse.StatusCode, ex);
                 }
 
-                string responseJson = await httpResponse.Content.ReadAsStringAsync();
+                var responseJson = await httpResponse.Content.ReadAsStringAsync();
+
                 if (responseJson != "null")
                     return JsonConvert.DeserializeObject<TResult>(responseJson);
+
                 return default(TResult);
             }
+        }
+
+        private HttpClient GetHttpClient(string authToken = null)
+        {
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            if (!string.IsNullOrWhiteSpace(authToken))
+            {
+                client.DefaultRequestHeaders.Add("access_token", authToken);
+            }
+
+            return client;
         }
 
         public async Task DeleteAsync(string action, string authToken = null)
@@ -156,19 +175,6 @@ namespace WebformsIntegratedBE_Standalone.IzendaBoundary
             }
         }
 
-        private HttpClient GetHttpClient(string authToken = null)
-        {
-            var client = new HttpClient();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            if (!string.IsNullOrWhiteSpace(authToken))
-            {
-                client.DefaultRequestHeaders.Add("access_token", authToken);
-            }
-
-            return client;
-        }
-
         private string BuildActionUri(string action, Dictionary<string, object> parameters = null)
         {
             var url = _basedUri + action;
@@ -201,7 +207,7 @@ namespace WebformsIntegratedBE_Standalone.IzendaBoundary
         #region Properties
         public string RequestedUrl { get; private set; }
 
-        public HttpStatusCode StatusCode { get; private set; }
+        public System.Net.HttpStatusCode StatusCode { get; private set; }
         #endregion
 
         #region CTOR

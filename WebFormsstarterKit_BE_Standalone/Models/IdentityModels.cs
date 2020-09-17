@@ -12,7 +12,6 @@ namespace WebformsIntegratedBE_Standalone.Models
     // You can add User data for the user by adding more properties to your User class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
-        #region Properties
         /// <summary>
         /// Property Tenant_Id can be nullable - SystemAdmin case
         /// </summary>
@@ -20,9 +19,7 @@ namespace WebformsIntegratedBE_Standalone.Models
         [ForeignKey("Tenant_Id")]
 
         public Tenant Tenant { get; set; }
-        #endregion
 
-        #region Methods
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -42,9 +39,11 @@ namespace WebformsIntegratedBE_Standalone.Models
             // Add custom user claims here
             return userIdentity;
         }
-        #endregion
     }
 
+    /// <summary>
+    /// Client DB Tenant
+    /// </summary>
     public class Tenant
     {
         public int Id { get; set; }
