@@ -388,7 +388,7 @@
       <DependentUpon>IzendaRoot.aspx</DependentUpon>
     </Compile>
     <Compile Include="IzendaBoundary\IzendaUtilities.cs" />
-    <Compile Include="Models\IndentifyHelper.cs" />
+    <Compile Include="Helper\RouteHelper.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\UserInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
