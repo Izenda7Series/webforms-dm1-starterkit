@@ -217,9 +217,6 @@
     <Content Include="Dashboard\DashboardDesigner.aspx" />
     <Content Include="Dashboard\Dashboards.aspx" />
     <Content Include="Dashboard\DashboardViewer.aspx" />
-    <Content Include="DBScript\IzendaWebFormsBEStandalone.sql" />
-    <Content Include="DBScript\retail.sql" />
-    <Content Include="DBScript\WebFormsBEStandalone.sql" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
