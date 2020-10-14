@@ -51,9 +51,9 @@ namespace WebformsIntegratedBE_Standalone.IzendaBoundary
                     return JsonConvert.DeserializeObject<T>(responeJson);
 
                 }
+
                 return default(T);
             }
-
         }
 
         public async Task PostAsync<T>(string action, T data, string authToken = null)

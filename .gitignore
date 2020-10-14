@@ -346,3 +346,6 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+
+# Specific resources of Izenda
+/WebFormsstarterKit_BE_Standalone/Scripts/izenda
