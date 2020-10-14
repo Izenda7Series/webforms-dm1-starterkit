@@ -2,7 +2,11 @@
 <asp:Content ID="ReportViewerContent" ContentPlaceHolderID="MainContent" runat="server">
     <script type="text/javascript">
         $(document).ready(function () {
-            izendaInitReportViewer('<%=ReportId%>');
+            var overridingFilterQueries = JSON.parse('<%=OverridingFilterQueries%>');
+            izendaInitReportViewer('<%=ReportId%>', {
+                overridingFilterValue: overridingFilterQueries
+            }
+            );
         });
     </script>
 
