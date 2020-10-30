@@ -208,6 +208,7 @@
     <Content Include="Account\CreateUser.aspx" />
     <Content Include="Account\CreateUserSuccess.aspx" />
     <Content Include="Account\FailedToCreateTenant.aspx" />
+    <Content Include="Account\Unauthorized.aspx" />
     <Content Include="Account\FailedToCreateUser.aspx" />
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\OpenAuthProviders.ascx" />
@@ -218,6 +219,7 @@
     <Content Include="Dashboard\Dashboards.aspx" />
     <Content Include="Dashboard\DashboardViewer.aspx" />
     <Content Include="Default.aspx" />
+    <Content Include="ExportManager.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -310,6 +312,13 @@
     <Compile Include="Account\FailedToCreateTenant.aspx.designer.cs">
       <DependentUpon>FailedToCreateTenant.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Account\Unauthorized.aspx.cs">
+      <DependentUpon>Unauthorized.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Unauthorized.aspx.designer.cs">
+      <DependentUpon>Unauthorized.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Account\FailedToCreateUser.aspx.cs">
       <DependentUpon>FailedToCreateUser.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -364,6 +373,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ExportManager.aspx.cs">
+      <DependentUpon>ExportManager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ExportManager.aspx.designer.cs">
+      <DependentUpon>ExportManager.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

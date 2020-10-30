@@ -32,6 +32,13 @@ namespace WebformsIntegratedBE_Standalone
                 checkPhysicalUrlAccess: false
             );
 
+            routes.MapPageRoute(
+                routeName: "ExportManager",
+                routeUrl: "izenda/myprofile",
+                physicalFile: "~/ExportManager.aspx",
+                checkPhysicalUrlAccess: false
+            );
+
             var settings = new FriendlyUrlSettings
             {
                 AutoRedirectMode = RedirectMode.Permanent

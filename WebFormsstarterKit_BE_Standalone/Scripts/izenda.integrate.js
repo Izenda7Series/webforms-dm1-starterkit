@@ -14,7 +14,7 @@
             "ReportViewerPopup": "reportviewerpopup",
             "Viewer": "viewer"
         },
-        "OnReceiveUnauthorizedResponse": redirectToLoginPage,
+        "OnReceiveUnauthorizedResponse": redirectToUnauthorizedResponsePage,
         "Timeout": 3600
     };
     IzendaSynergy.config(configJson);
@@ -27,12 +27,12 @@ function errorFunc() {
         location.href = "/Account/Login";
     }, function() {
         // user clicked "cancel"
+        location.href = "/";
     });
 }
 
-function redirectToLoginPage() {
-    alert("You're unauthorized to access Izenda page");
-    location.href = "/Account/Login";
+function redirectToUnauthorizedResponsePage() {
+    location.href = "/Account/Unauthorized";
 }
 
 var RecycleComponent = function (componentID) {
@@ -286,4 +286,16 @@ var izendaInitReportPartExportViewer = function (reportPartId, token) {
         useQueryParam: true,
         useHash: false
     });
+};
+
+var izendaInitRenderExportManagerPage = function () {
+    function successFunc(data, status) {
+        var currentUserContext = {
+            token: data
+        };
+
+        IzendaSynergy.setCurrentUserContext(currentUserContext);
+        IzendaSynergy.renderExportManagerPage(document.getElementById('izenda-root'));
+    }
+    this.DoRender(successFunc);
 };
