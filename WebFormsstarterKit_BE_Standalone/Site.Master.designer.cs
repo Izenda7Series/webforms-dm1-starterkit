@@ -69,6 +69,24 @@ namespace WebformsIntegratedBE_Standalone
         protected global::System.Web.UI.WebControls.ContentPlaceHolder FailedToCreateUserContent;
 
         /// <summary>
+        /// Unauthorized control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder Unauthorized;
+
+        /// <summary>
+        /// ExportManager control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder ExportManager;
+
+        /// <summary>
         /// LoginContent control.
         /// </summary>
         /// <remarks>

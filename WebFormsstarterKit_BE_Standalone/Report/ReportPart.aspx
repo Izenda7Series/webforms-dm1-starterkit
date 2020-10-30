@@ -40,10 +40,19 @@
     </script>
 
     <style>
-        #izenda-root > .izenda {
-            background-color: transparent !important;
-        }
-    </style>
+    #izenda-root > .izenda {
+        background-color: transparent !important;
+    }
+
+    body {
+        padding: 0 !important;
+    }
+
+    .container-fluid {
+        padding: 0 !important;
+        line-height: 0 !important;
+    }
+</style>
 
     <div class="izenda-container" id="izenda-root" style="margin-top: 0px;"></div>
 </body>
